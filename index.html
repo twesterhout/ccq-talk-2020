@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>Slide 1
+        </section>
+
+				<section>
+          <ul>
+            <li>Basic concepts</li>
+            <li>Experimental setup</li>
+            <li>Results</li>
+            <li>Conclusions and outlook</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Expressibility &amp; Generalization</h2>
+          <img src="img/generalization-overfitting.png"
+               style="width: 50%; float: left; margin-right: 2%;">
+          <div style="text-align: left;">
+          <p><em style="color: #D95F02;">Expressibility</em> is the ability
+            of a neural network to accurately represent data.</p>
+          <p><em style="color: #D95F02;">Generalization</em> is the ability
+            of a neural network to correctly predict results on samples which
+            were not included in the training dataset.</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>Sampling</h2>
+          <p>Obtain $|\psi\rangle$ with exact diagonalization</p>
+          <div class="row" style="display: flex;">
+            <div class="column"
+                 style="float: left; width: 40%;">
+              \[ |\psi\rangle = \sum_i \psi_i |\sigma_i\rangle \]
+            </div>
+            <div class="column" style="float: right; width: 60%;">
+              $|\psi_i|^2$ forms a discrete probability distribution
+            </div>
+          </div>
+          <div style="margin-bottom: 5%;">
+            Sample exactly from it<br>
+            (no Monte Carlo, no ergodicity issues)
+          </div>
+          <div class="row" style="display: flex;">
+            <div class="column"
+                 style="float: left; width: 40%;">
+              $\varepsilon_{\text{train}}$<br>
+              training dataset
+            </div>
+            <div class="column"
+                 style="float: right; width: 60%;">
+              $1 - \varepsilon_{\text{train}}$<br>
+              everything else (test dataset)
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Physical systems</h2>
+          <img src="img/physical-systems.png" style="width: 100%;">
+          <p>$$\hat H = J_1 \sum\limits_{\langle a, b \rangle}
+                              \boldsymbol{\sigma}_a \otimes \boldsymbol{\sigma}_b
+                      + J_2 \sum\limits_{\langle \langle a, b \rangle \rangle}
+                              \boldsymbol{\sigma}_a \otimes \boldsymbol{\sigma}_b$$</p>
+          <ul>
+            <li>$J_2/J_1$ allows us to tune frustration</li>
+            <li>Periodic clusters of 24, 30, 32, or 36 spins</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Training</h2>
+
+          <div style="text-align: left;">
+            Use two neural networks to represent $|\psi\rangle$:
+            <ul>
+              <li>"amplitude network" predicts &nbsp; $\log(|\psi_i|)$<br>
+                  regression task; minimize MSE or maximize overlap
+              </li>
+              <li>"sign network" predicts &nbsp; $\text{sign}(\psi_i)$<br>
+                  binary classification task; minimize cross-entropy
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Sign structure generalization</h3>
+          <img src="img/j2-dependence.png" style="width: 100%;">
+          <ul>
+            <li>24 site clusters</li>
+            <li>$\varepsilon_\text{train} \approx 10^{-2}$</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Amplitudes vs Signs</h3>
+          <img src="img/learning-amplitudes.png"
+               style="width: 40%; float: left; margin-right: 2%;">
+          <p>Kagome lattice</p>
+          <p>Sign structure is much harder to learn!</p>
+        </section>
+
+        <section>
+          <h3>More data?</h3>
+          <img src="img/more-data.png"
+               style="width: 40%; float: left; margin-right: 2%;">
+          <p>Kagome lattice</p>
+          <p>There exists a critical $\varepsilon_\text{train}$ necessary to
+             learn the sign structure</p>
+        </section>
+
+        <section>
+          Critical training dataset size and system size scaling
+        </section>
+
+        <section>
+          What does it have to do with SR? and limiting case -- expressibility
+        </section>
+
+        <section>
+          Conclusions and Outlook
+        </section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/math/math.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+        center: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealMath ]
+			});
+		</script>
+	</body>
+</html>
