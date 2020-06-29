@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Wavefunction sign structure generalization in frustrated magnets</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
@@ -12,6 +12,11 @@
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+    <style type="text/css" media="screen">
+      .reveal {
+        font-size: 36px;
+      }
+    </style>
 	</head>
 	<body>
 		<div class="reveal">
@@ -19,7 +24,10 @@
 				<section>Slide 1
         </section>
 
-				<section>
+				<section
+          data-background-image="img/ru_logo_a4_imm_eng_1.png"
+          data-background-size="30%"
+          data-background-position="bottom right 10%">
           <ul>
             <li>Basic concepts</li>
             <li>Experimental setup</li>
@@ -28,52 +36,60 @@
           </ul>
         </section>
 
-        <section>
-          <h2>Expressibility &amp; Generalization</h2>
-          <img src="img/generalization-overfitting.png"
-               style="width: 50%; float: left; margin-right: 2%;">
-          <div style="text-align: left;">
-          <p><em style="color: #D95F02;">Expressibility</em> is the ability
-            of a neural network to accurately represent data.</p>
-          <p><em style="color: #D95F02;">Generalization</em> is the ability
-            of a neural network to correctly predict results on samples which
-            were not included in the training dataset.</p>
+				<section
+          data-background-image="img/ru_logo_a4_imm_eng_1.png"
+          data-background-size="30%"
+          data-background-position="bottom right 10%">
+          <h3>Expressibility &amp; Generalization</h3>
+          <div class="r-hstack">
+            <div style="width: 50%; margin-right: 20px;">
+              <img src="img/generalization-overfitting.png" >
+              <p style="font-size: 18px;">image source: www.datarobot.com</p>
+            </div>
+            <div style="width: 50%;">
+              <p><u><b>Expressibility</b></u> is the ability of a neural network to
+                 accurately represent data.</p>
+              <p><u><b>Generalization</b></u> is the ability of a neural network to
+                 correctly predict results on samples which were not included in
+                 the training dataset.</p>
+            </div>
           </div>
         </section>
 
-        <section>
-          <h2>Sampling</h2>
+				<section
+          data-background-image="img/ru_logo_a4_imm_eng_1.png"
+          data-background-size="30%"
+          data-background-position="bottom right 10%">
+          <h3>Sampling</h3>
           <p>Obtain $|\psi\rangle$ with exact diagonalization</p>
-          <div class="row" style="display: flex;">
-            <div class="column"
-                 style="float: left; width: 40%;">
-              \[ |\psi\rangle = \sum_i \psi_i |\sigma_i\rangle \]
-            </div>
-            <div class="column" style="float: right; width: 60%;">
-              $|\psi_i|^2$ forms a discrete probability distribution
-            </div>
+          <div class="r-hstack">
+            <p style="margin: 30px; margin-top: -10px; margin-bottom: 0;">
+              \[ |\psi\rangle = \sum_i \psi_i |\sigma_i\rangle \]</p>
+            <p style="margin: 30px; margin-top: -10px; margin-bottom: 0;">
+              $|\psi_i|^2$ forms a discrete probability distribution</p>
           </div>
           <div style="margin-bottom: 5%;">
-            Sample exactly from it<br>
+            Sample <b>exactly</b> from it<br>
             (no Monte Carlo, no ergodicity issues)
           </div>
-          <div class="row" style="display: flex;">
-            <div class="column"
-                 style="float: left; width: 40%;">
-              $\varepsilon_{\text{train}}$<br>
-              training dataset
+          <div class="r-hstack">
+            <div class="r-frame" style="margin-right: 7%;">
+              <p style="margin: 20px;">
+                $\varepsilon_{\text{train}}$<br>training dataset</p>
             </div>
-            <div class="column"
-                 style="float: right; width: 60%;">
-              $1 - \varepsilon_{\text{train}}$<br>
-              everything else (test dataset)
+            <div class="r-frame" style="margin-left: 7%;">
+              <p style="margin: 20px;">
+                $1 - \varepsilon_{\text{train}}$<br>everything else (test dataset)</p>
             </div>
           </div>
         </section>
 
-        <section>
-          <h2>Physical systems</h2>
-          <img src="img/physical-systems.png" style="width: 100%;">
+				<section
+          data-background-image="img/ru_logo_a4_imm_eng_1.png"
+          data-background-size="30%"
+          data-background-position="bottom right 10%">
+          <h3>Physical systems</h3>
+          <img src="img/physical-systems.png" style="width: 80%; margin-bottom: 0;">
           <p>$$\hat H = J_1 \sum\limits_{\langle a, b \rangle}
                               \boldsymbol{\sigma}_a \otimes \boldsymbol{\sigma}_b
                       + J_2 \sum\limits_{\langle \langle a, b \rangle \rangle}
@@ -84,9 +100,11 @@
           </ul>
         </section>
 
-        <section>
-          <h2>Training</h2>
-
+				<section
+          data-background-image="img/ru_logo_a4_imm_eng_1.png"
+          data-background-size="30%"
+          data-background-position="bottom right 10%">
+          <h3>Training</h3>
           <div style="text-align: left;">
             Use two neural networks to represent $|\psi\rangle$:
             <ul>
@@ -100,41 +118,100 @@
           </div>
         </section>
 
-        <section>
+				<section
+          data-background-image="img/ru_logo_a4_imm_eng_1.png"
+          data-background-size="30%"
+          data-background-position="bottom right 10%">
           <h3>Sign structure generalization</h3>
-          <img src="img/j2-dependence.png" style="width: 100%;">
           <ul>
-            <li>24 site clusters</li>
-            <li>$\varepsilon_\text{train} \approx 10^{-2}$</li>
+            <li>24 site clusters; &nbsp; $\varepsilon_\text{train} \approx 10^{-2}$</li>
+            <li>Generalization quality reflects phase transitions</li>
           </ul>
+          <div class="r-stretch">
+            <img src="img/j2-dependence.png">
+          </div>
         </section>
 
-        <section>
+				<section
+          data-background-image="img/ru_logo_a4_imm_eng_1.png"
+          data-background-size="30%"
+          data-background-position="bottom right 10%">
           <h3>Amplitudes vs Signs</h3>
-          <img src="img/learning-amplitudes.png"
-               style="width: 40%; float: left; margin-right: 2%;">
-          <p>Kagome lattice</p>
-          <p>Sign structure is much harder to learn!</p>
+          <div class="r-hstack">
+            <div style="width: 50%;">
+              <p style="marin-bottom: 0; font-size: 80%;">24 site Kagome lattice</p>
+              <img src="img/learning-amplitudes.png" style="margin-top: 0; width: 100%;">
+            </div>
+            <div class="width: 50%">
+              <dl style="margin-left: 0;">
+                <dt style="font-weight: normal;">Hybrid states:</dt>
+                <dd>
+                  <ul>
+                    <li>amplitudes from NN &amp; signs from ED;</li>
+                    <li>signs from NN &amp; amplitudes from ED.</li>
+                  </ul>
+                </dd>
+              </dl>
+              <p style="margin-top: 10%;">
+                Sign structure is much harder to learn!</p>
+            </div>
+          </div>
         </section>
 
-        <section>
+				<section
+          data-background-image="img/ru_logo_a4_imm_eng_1.png"
+          data-background-size="30%"
+          data-background-position="bottom right 10%">
           <h3>More data?</h3>
-          <img src="img/more-data.png"
-               style="width: 40%; float: left; margin-right: 2%;">
-          <p>Kagome lattice</p>
-          <p>There exists a critical $\varepsilon_\text{train}$ necessary to
-             learn the sign structure</p>
+          <div class="r-hstack">
+            <div style="width: 50%;">
+              <p style="marin-bottom: 0; font-size: 80%;">24 site Kagome lattice</p>
+              <img src="img/more-data.png" style="margin-top: 0;">
+            </div>
+            <div style="width: 50%;">
+              <p>Generalization quality exhibits a phase transition.</p>
+              <p>There is a critical amount of data necessary to learn the sign structure.</p>
+            </div>
+          </div>
         </section>
 
-        <section>
-          Critical training dataset size and system size scaling
+				<section
+          data-background-image="img/ru_logo_a4_imm_eng_1.png"
+          data-background-size="30%"
+          data-background-position="bottom right 10%">
+          <h3>Scaling with system size</h3>
+          <div class="r-hstack">
+            <div style="width: 50%;">
+              <p style="font-size: 80%;">Square lattice (24, 32, &amp; 36 sites)</p>
+              <img src="img/system-size-scaling.png" style="margin-bottom: 0;">
+              <p style="font-size: 60%; margin-top: 0;">
+                $N$ &mdash; Hilbert space dimension;<br>
+                $N_\text{critical}$ &mdash; critical dataset size</p>
+            </div>
+            <div style="width: 50%;">
+              <p>Critical dataset size grows slowly with the sytem size.</p>
+            </div>
+          </div>
         </section>
 
-        <section>
-          What does it have to do with SR? and limiting case -- expressibility
+				<section
+          data-background-image="img/ru_logo_a4_imm_eng_1.png"
+          data-background-size="30%"
+          data-background-position="bottom right 10%">
+          <h3>What about VMC?</h3>
+          <div class="r-hstack">
+            <img src="img/relation-to-sr.png" style="width: 70%;">
+            <div>
+              <p>No problem expressing the state.</p>
+              <p>VMC results mimic the behavior of generalization quality.</p>
+            </div>
+          </div>
         </section>
 
-        <section>
+				<section
+          data-background-image="img/ru_logo_a4_imm_eng_1.png"
+          data-background-size="30%"
+          data-background-position="bottom right 10%">
           Conclusions and Outlook
         </section>
 			</div>
@@ -151,6 +228,15 @@
 			Reveal.initialize({
 				hash: true,
         center: true,
+        controls: false,
+        controlsTutorial: false,
+        slideNumber: "c",
+        transition: "none",
+        width: 960,
+        height: 700,
+        progress: false,
+        minScale: 0.8,
+        maxScale: 1.2,
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealMath ]
 			});
