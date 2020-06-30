@@ -25,9 +25,20 @@
           data-background-image="img/ru_logo_a4_imm_eng_1.png"
           data-background-size="30%"
           data-background-position="bottom right 10%">
+          <!--
+            First of all, I'd like to thank the organizers for setting up this
+            nice conference, and also for letting me to speak here.
+
+            The work I'm mostly going to talk about was done in close
+            collaboration with a few people, namely: Nikita Astrakhantsev from
+            University of Zurich, Konstantin Tikhonov from Skolkovo institute
+            of Science and Technology, Mikhail Katsnelson from Radboud
+            University, and Andrey Bagrov from Uppsala University.
+          -->
           <h2>Wavefunction sign structure generalization in frustrated magnets</h2>
           <div style="margin-top: 10%; text-align: left; font-size: 80%;">
             <p>
+              Tom Westerhout (Radboud University)<br>
               Nikita Astrakhantsev (University of Zurich)<br>
               Konstantin S. Tikhonov (Skolkovo Institute of Science and Technology)<br>
               Mikhail Katsnelson (Radboud University)<br>
@@ -36,23 +47,77 @@
           </div>
         </section>
 
+        <!--
 				<section
           data-background-image="img/ru_logo_a4_imm_eng_1.png"
           data-background-size="30%"
           data-background-position="bottom right 10%">
+            The plan is a follows. I'll start by reminding you of very basic
+            but still very important concepts. Then I'll talk a bit about
+            setting up an isolated experiment for studying generalization
+            properties. Finally, I'll presents some results and discuss which
+            conclusions can be made from them.
           <h3>Outline</h3>
           <ul>
             <li>Basic concepts</li>
             <li>Experimental setup</li>
             <li>Results</li>
-            <li>Conclusions and outlook</li>
+            <li>Conclusions</li>
           </ul>
+        </section>
+        -->
+
+				<section
+          data-background-image="img/ru_logo_a4_imm_eng_1.png"
+          data-background-size="30%"
+          data-background-position="bottom right 10%">
+          <!--
+            Sign structure has been mentioned a few times during this
+            conference. E.g. that neural quantum state ansatz works better when
+            the sign structure is known in advance and doesn't have to be
+            learned. Or that the factor limiting NQS performance for frustrated
+            systems is related to complicated sign structure.
+
+            I'd like to make that statement explicit and claim that
+            wavefunction sign structure generalization is currently the main
+            obstacle when tackling frustrated magnets with NQS.
+          -->
+          <h3>NQS for frustrated magnets</h3>
+          <img src="img/physical-systems.png" style="width: 80%; margin-bottom: 0;">
+          <p style="margin-top: -10px;">
+            $$\hat H = J_1 \sum\limits_{\langle a, b \rangle}
+                              \boldsymbol{\sigma}_a \otimes \boldsymbol{\sigma}_b
+                     + J_2 \sum\limits_{\langle \langle a, b \rangle \rangle}
+                              \boldsymbol{\sigma}_a \otimes \boldsymbol{\sigma}_b$$</p>
+          <ul>
+            <li>$J_2/J_1$ allows us to tune frustration.</li>
+            <li>Periodic clusters of 24, 30, 32, or 36 spins.</li>
+          </ul>
+          <div style="font-size: 60%; float: left; text-align: left; width: 60%;">
+            <p>
+              A. Szabó &amp; C. Castelnovo, <em>arXiv:2002.04613</em><br>
+              K. Choo, T. Neupert, &amp; G. Carleo, <em>Phys. Rev. B 100, 125124 (2019)</em><br>
+              Y. Nomura &amp; M. Imada, <em>arXiv:2005.14142</em>
+            </p>
+          </div>
         </section>
 
 				<section
           data-background-image="img/ru_logo_a4_imm_eng_1.png"
           data-background-size="30%"
           data-background-position="bottom right 10%">
+          <!--
+            Expressibility and generalization. These concepts will be
+            reoccuring throughout the talk and I think it's a good idea to
+            recap their definitions.
+
+            Expressibility is the ability of a neural network to accurately
+            represent the data. It's what people have in mind when they mention
+            that some neural network architectures are universal approximators.
+
+            However, this is not everything we want from a good ansatz as can
+            be seen on the right picture. 
+          -->
           <h3>Expressibility &amp; Generalization</h3>
           <div class="r-hstack">
             <div style="width: 50%; margin-right: 20px;">
@@ -61,7 +126,7 @@
             </div>
             <div style="width: 50%;">
               <p><u><b>Expressibility</b></u> is the ability of a neural network to
-                 accurately represent data.</p>
+                 accurately represent the data.</p>
               <p><u><b>Generalization</b></u> is the ability of a neural network to
                  correctly predict results on samples which were not included in
                  the training dataset.</p>
@@ -76,12 +141,12 @@
           <h3>Sampling</h3>
           <p>Obtain $|\psi\rangle$ with exact diagonalization</p>
           <div class="r-hstack">
-            <p style="margin: 30px; margin-top: -10px; margin-bottom: 0;">
+            <p style="margin: 30px; margin-top: -30px; margin-bottom: 0;">
               \[ |\psi\rangle = \sum_i \psi_i |\sigma_i\rangle \]</p>
-            <p style="margin: 30px; margin-top: -10px; margin-bottom: 0;">
+            <p style="margin: 30px; margin-top: -30px; margin-bottom: 0;">
               $|\psi_i|^2$ forms a discrete probability distribution</p>
           </div>
-          <div style="margin-bottom: 5%;">
+          <div style="margin-top: -20px; margin-bottom: 20px;">
             Sample <b>exactly</b> from it<br>
             (no Monte Carlo, no ergodicity issues)
           </div>
@@ -101,31 +166,18 @@
           data-background-image="img/ru_logo_a4_imm_eng_1.png"
           data-background-size="30%"
           data-background-position="bottom right 10%">
-          <h3>Physical systems</h3>
-          <img src="img/physical-systems.png" style="width: 80%; margin-bottom: 0;">
-          <p>$$\hat H = J_1 \sum\limits_{\langle a, b \rangle}
-                              \boldsymbol{\sigma}_a \otimes \boldsymbol{\sigma}_b
-                      + J_2 \sum\limits_{\langle \langle a, b \rangle \rangle}
-                              \boldsymbol{\sigma}_a \otimes \boldsymbol{\sigma}_b$$</p>
-          <ul>
-            <li>$J_2/J_1$ allows us to tune frustration</li>
-            <li>Periodic clusters of 24, 30, 32, or 36 spins</li>
-          </ul>
-        </section>
-
-				<section
-          data-background-image="img/ru_logo_a4_imm_eng_1.png"
-          data-background-size="30%"
-          data-background-position="bottom right 10%">
           <h3>Training</h3>
           <div style="text-align: left;">
-            Use two neural networks to represent $|\psi\rangle$:
+            <p>Use two neural networks to represent $|\psi\rangle$<br>
+               (which we obtained with ED):</p>
             <ul>
-              <li>"amplitude network" predicts &nbsp; $\log(|\psi_i|)$<br>
-                  regression task; minimize MSE or maximize overlap
+              <li style="margin-top: 3%;">
+                "amplitude network" predicts &nbsp; $\log(|\psi_i|)$<br>
+                regression task; minimize MSE or maximize overlap
               </li>
-              <li>"sign network" predicts &nbsp; $\text{sign}(\psi_i)$<br>
-                  binary classification task; minimize cross-entropy
+              <li style="margin-top: 5%;">
+                "sign network" predicts &nbsp; $\text{sign}(\psi_i)$<br>
+                binary classification task; minimize cross-entropy
               </li>
             </ul>
           </div>
