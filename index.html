@@ -31,7 +31,7 @@
 
             The work I'm mostly going to talk about was done in close
             collaboration with a few people, namely: Nikita Astrakhantsev from
-            University of Zurich, Konstantin Tikhonov from Skolkovo institute
+            University of Zurich, Konstantin Tikhonov from Skolkovo Institute
             of Science and Technology, Mikhail Katsnelson from Radboud
             University, and Andrey Bagrov from Uppsala University.
           -->
@@ -47,40 +47,24 @@
           </div>
         </section>
 
-        <!--
-				<section
-          data-background-image="img/ru_logo_a4_imm_eng_1.png"
-          data-background-size="30%"
-          data-background-position="bottom right 10%">
-            The plan is a follows. I'll start by reminding you of very basic
-            but still very important concepts. Then I'll talk a bit about
-            setting up an isolated experiment for studying generalization
-            properties. Finally, I'll presents some results and discuss which
-            conclusions can be made from them.
-          <h3>Outline</h3>
-          <ul>
-            <li>Basic concepts</li>
-            <li>Experimental setup</li>
-            <li>Results</li>
-            <li>Conclusions</li>
-          </ul>
-        </section>
-        -->
-
 				<section
           data-background-image="img/ru_logo_a4_imm_eng_1.png"
           data-background-size="30%"
           data-background-position="bottom right 10%">
           <!--
-            Sign structure has been mentioned a few times during this
-            conference. E.g. that neural quantum state ansatz works better when
-            the sign structure is known in advance and doesn't have to be
-            learned. Or that the factor limiting NQS performance for frustrated
-            systems is related to complicated sign structure.
+            Sign structure has already been mentioned a few times during this
+            conference. For example that neural quantum state ansatz works
+            better when the sign structure is known in advance and doesn't have
+            to be learned. Or that the factor limiting NQS performance for
+            frustrated systems is related to complicated sign structure.
 
             I'd like to make that statement explicit and claim that
             wavefunction sign structure generalization is currently the main
             obstacle when tackling frustrated magnets with NQS.
+
+            To illustrate this claim we'll focus on three systems depicted on
+            the slide: J1-J2 model on square lattice, anisotropic triangular
+            lattice, and anisotropic Kagome lattice.
           -->
           <h3>NQS for frustrated magnets</h3>
           <img src="img/physical-systems.png" style="width: 80%; margin-bottom: 0;">
@@ -107,16 +91,20 @@
           data-background-size="30%"
           data-background-position="bottom right 10%">
           <!--
-            Expressibility and generalization. These concepts will be
-            reoccuring throughout the talk and I think it's a good idea to
-            recap their definitions.
+            Let us start by recapping the definitions of two basic but very
+            important concepts: expressibility and generalization. 
 
             Expressibility is the ability of a neural network to accurately
             represent the data. It's what people have in mind when they mention
             that some neural network architectures are universal approximators.
 
             However, this is not everything we want from a good ansatz as can
-            be seen on the right picture. 
+            be seen on the right picture. This is where generalization comes
+            in. It is the ability to correctly predict results on samples which
+            were not seen during training.
+
+            Generalization is what I'll be focusing on during this talk. So how
+            does one study generalization properties of neural networks?
           -->
           <h3>Expressibility &amp; Generalization</h3>
           <div class="r-hstack">
@@ -138,6 +126,24 @@
           data-background-image="img/ru_logo_a4_imm_eng_1.png"
           data-background-size="30%"
           data-background-position="bottom right 10%">
+          <!--
+            Our goal is to set up an isolated experiment where one can see the
+            effects of generalization. We focus on supervised learning and use
+            ground states obtained by means of exact diagonalization as target
+            states.
+
+            For system sizes where exact diagonalisation is feasible, we can
+            store the vector of wavefunction coefficients and subsequently
+            sample from it exactly. In other words, we do not rely on Monte
+            Carlo or any other approximate sampling method and thus eliminate
+            all potential ergodicity issues.
+
+            We effectively split Hilbert space basis into two parts: epsilon
+            train part which we have seen during sampling and everything else.
+            The first part is usually small and is used it for training.
+            Trained neural networks are then tested on the remaining part of
+            the Hilbert space basis.
+          -->
           <h3>Sampling</h3>
           <p>Obtain $|\psi\rangle$ with exact diagonalization</p>
           <div class="r-hstack">
@@ -153,7 +159,7 @@
           <div class="r-hstack">
             <div class="r-frame" style="margin-right: 7%;">
               <p style="margin: 20px;">
-                $\varepsilon_{\text{train}}$<br>training dataset</p>
+                $\varepsilon_{\text{train}} \ll 1$<br>training dataset</p>
             </div>
             <div class="r-frame" style="margin-left: 7%;">
               <p style="margin: 20px;">
@@ -166,6 +172,18 @@
           data-background-image="img/ru_logo_a4_imm_eng_1.png"
           data-background-size="30%"
           data-background-position="bottom right 10%">
+          <!--
+            Since the Hamiltonian is real, what we do is split the ground state
+            wavefunction which we obtained from exact diagonalization into
+            amplitudes and signs. Then we employ two neural networks to
+            approximate them separately.
+
+            This splits the job into a regression and a classification tasks,
+            and we use different loss functions in each case.
+
+            Let us have a closer look at the classification task since one
+            would intuitively expect it to be simpler.
+          -->
           <h3>Training</h3>
           <div style="text-align: left;">
             <p>Use two neural networks to represent $|\psi\rangle$<br>
@@ -187,6 +205,24 @@
           data-background-image="img/ru_logo_a4_imm_eng_1.png"
           data-background-size="30%"
           data-background-position="bottom right 10%">
+          <!--
+            We train a classifier on 24 site clusters and show overlap with the
+            exact ground state as function of J2 over J1. Note that the overlap
+            is computed on the test dataset only, in other words on samples
+            that the network has never seen before.
+
+            We show results for three different neural network architectures.
+            Namely, one and two layer dense networks, and a concolutional
+            neural network enforcing translational invariance.
+
+            Frustrated regions are shaded on the plots. We clearly see that in
+            simple phases, networks learn the sign structure quite well.
+            However, they struggle in frustrated phases. We also see that
+            different networks generalize very differently. For example,
+            convolutional architectures perform much better that simple
+            multi-layer perceptrons, which is most likely due to translational
+            invariance.
+          -->
           <h3>Sign structure generalization</h3>
           <ul>
             <li>24 site clusters; &nbsp; $\varepsilon_\text{train} \approx 10^{-2}$</li>
@@ -201,6 +237,22 @@
           data-background-image="img/ru_logo_a4_imm_eng_1.png"
           data-background-size="30%"
           data-background-position="bottom right 10%">
+          <!--
+            Let us now compare the results of learning amplitudes and learning
+            signs. We use "hybrid" states. For example, signs are predicted by
+            a neural network and amplitudes are taken from ED. And the other
+            way around. By employing a common metric: overlap, we can compare
+            the difficulty of two tasks.
+
+            On the left, I show results for the Kagome lattice. Yes,
+            generalization of amplitudes drops when one enters frustrated
+            regime, but it's still much much better than that of signs.
+
+            Can we do something about sign structure generalization? One can of
+            course try and play around with neural network architectures,
+            symmetries, and various hyperparameters, but another natural
+            question to ask is: what happens if I feed the network more data?
+          -->
           <h3>Amplitudes vs Signs</h3>
           <div class="r-hstack">
             <div style="width: 50%;">
@@ -227,23 +279,62 @@
           data-background-image="img/ru_logo_a4_imm_eng_1.png"
           data-background-size="30%"
           data-background-position="bottom right 10%">
+          <!--
+            Instead of tuning frustration, we now increase the size of training
+            dataset epsilon train.
+            
+            Interestingly, overlap on test dataset doesn't increase gradualy
+            but rather almost like a step function. As if generalization
+            quality has a phase transition.
+
+            So there is a critical dataset size which is necessary to learn
+            something meaningful about the sign structure.
+          -->
           <h3>More data?</h3>
           <div class="r-hstack">
-            <div style="width: 50%;">
+            <div style="width: 41%;">
               <p style="marin-bottom: 0; font-size: 80%;">24 site Kagome lattice</p>
               <img src="img/more-data.png" style="margin-top: 0;">
             </div>
-            <div style="width: 50%;">
+            <div style="width: 42%;">
+              <p style="marin-bottom: 0; font-size: 80%;">24 site square lattice</p>
+              <img src="img/more-data-square.png" style="margin-top: 0;">
+            </div>
+            <div style="width: 30%;">
               <p>Generalization quality exhibits a phase transition.</p>
-              <p>There is a critical amount of data necessary to learn the sign structure.</p>
             </div>
           </div>
+          <p style="margin-top: -2%;">
+            There is a critical amount of data necessary to learn the sign
+            structure.
+          </p>
         </section>
 
 				<section
           data-background-image="img/ru_logo_a4_imm_eng_1.png"
           data-background-size="30%"
           data-background-position="bottom right 10%">
+          <!--
+            This brings me to probably the most optimistic slide of this talk.
+            How does critical dataset size scale with system size?
+
+            Two things. First, note that instead of epsilon critical, we
+            use N critical. This is because fraction of the Hilbert space basis
+            is not a very good measure when you consider bigger systems. So
+            instead we show the absolute number of samples.
+
+            And secondly, results here are for the square lattice since it's
+            slightly easier to diagonalize.
+
+            Of course, it's not very reliable to make conclusions based on
+            three points, but so far it looks very promising. Adding 12 spins
+            to the system increases the training dataset size by a factor
+            around 10.
+
+            Note also that compared to the Kagome lattice, the level of
+            frustration does not have much effect on the critical training
+            dataset size.
+          -->
           <h3>Scaling with system size</h3>
           <div class="r-hstack">
             <div style="width: 50%;">
@@ -263,6 +354,32 @@
           data-background-image="img/ru_logo_a4_imm_eng_1.png"
           data-background-size="30%"
           data-background-position="bottom right 10%">
+          <!--
+            Finally, let me address two questions or concerns often raised
+            regarding experiments done here.
+
+            First, it's been suggested that our networks are simply not
+            expressive enough for frustrated phases. This is not the case. Even
+            the simplest networks are able to represent the states very
+            accurately. The only trouble is that training them takes a looong time.
+
+            Secondly, it might not be immediately clear whether these results
+            are relevant to VMC simulations. I've already showed you top panel,
+            but now compare it to the bottom panel where Stochastic
+            Reconfiguratoin results are shown. They clearly resemble the
+            behavior of generalization quality very closely.
+
+            If one thinks more carefully about it, it's not at all surprising
+            either. At each step of a VMC simulation we sample a tiny subset of
+            the Hilbert space basis. We then compute gradients or other
+            quantities and update the variational parameters in some way. Even
+            after repeating this procedure 100 or 1000 of times, we will still
+            not have seen much of the Hilbert space. So chances are that when
+            later we measure correlation functions and other observables, we
+            will use basis elements which we have never encountered before. And
+            we hope to get reasnable results. But this is the very definition
+            of good generalizatoin.
+          -->
           <h3>What about VMC?</h3>
           <div class="r-hstack">
             <img src="img/relation-to-sr.png" style="width: 70%;">
@@ -271,6 +388,8 @@
               <p>VMC results mimic the behavior of generalization quality.</p>
             </div>
           </div>
+          <p style="float: left; font-size: 60%; width: 60%;">
+            D. Kochkov &amp; B.K. Clark, <em>arXiv:1811.12423</em></p>
         </section>
 
 				<section
